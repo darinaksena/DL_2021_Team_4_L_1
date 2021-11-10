@@ -36,30 +36,30 @@ def mkdir(path):
         pass
 
 if __name__ == '__main__':
-
     mkdir(DATASET_PATH)
     mkdir(TRAIN_PATH)
     mkdir(VALID_PATH)
     mkdir(TEST_PATH)
-    for clazz in range(1, 11):
+    for clazz in range(10):
         class_path = PATH + '/{}'.format(clazz)
         files = os.listdir(class_path)
+        sz = len(files)
 
         mkdir(TRAIN_PATH + '/{}'.format(clazz) + '/')
         mkdir(VALID_PATH + '/{}'.format(clazz) + '/')
         mkdir(TEST_PATH + '/{}'.format(clazz) + '/')
 
-        for i in range(0, 15):
+        for i in range(0, sz // 2):
             path = class_path + '/' + files[i]
             new_path = TRAIN_PATH + '/{}'.format(clazz) + '/' + files[i]
             process(path, new_path)
 
-        for i in range(15, 20):
+        for i in range(sz // 2, (sz * 2) // 3):
             path = class_path + '/' + files[i]
             new_path = VALID_PATH + '/{}'.format(clazz) + '/' + files[i]
             process(path, new_path)
 
-        for i in range(20, 30):
+        for i in range((sz * 2) // 3, sz):
             path = class_path + '/' + files[i]
             new_path = TEST_PATH + '/{}'.format(clazz) + '/' + files[i]
             process(path, new_path)
